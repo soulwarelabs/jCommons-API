@@ -4,7 +4,7 @@
  *
  * File:     Box.java
  * Folder:   /.../com/soulwarelabs/jcommons
- * Revision: 1.02, 17 April 2014
+ * Revision: 1.03, 17 April 2014
  * Created:  10 February 2014
  * Author:   Ilya Gubarev
  *
@@ -29,6 +29,8 @@ import java.io.Serializable;
 
 /**
  * Value container.
+ *
+ * @param <T> value type.
  *
  * @since v1.0
  *
@@ -79,6 +81,29 @@ public class Box<T> implements Serializable {
      */
     public void setValue(T value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+        Box<?> other = (Box<?>) object;
+        if ((value != other.value) &&
+                (value == null || !value.equals(other.value))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 7;
+        result = 67 * result + (value != null ? value.hashCode() : 0);
+        return result;
     }
 
     @Override
