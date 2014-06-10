@@ -4,7 +4,7 @@
  *
  * File:     Pair.java
  * Folder:   /.../com/soulwarelabs/jcommons
- * Revision: 1.01, 17 April 2014
+ * Revision: 1.02, 10 June 2014
  * Created:  14 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -29,14 +29,16 @@ import java.io.Serializable;
 
 /**
  * Key-value container.
+ * <p>
+ * Designed to be logically comparable by the key.
  *
  * @param <K> key type.
  * @param <V> value type.
  *
- * @since v1.0
+ * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 17 April 2014
+ * @version 10 June 2014
  */
 public class Pair<K, V> implements Serializable {
 
@@ -46,7 +48,7 @@ public class Pair<K, V> implements Serializable {
     /**
      * Creates a new instance of key-value container.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public Pair() {
         this(null);
@@ -57,7 +59,7 @@ public class Pair<K, V> implements Serializable {
      *
      * @param key contained key.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public Pair(K key) {
         this(key, null);
@@ -69,7 +71,7 @@ public class Pair<K, V> implements Serializable {
      * @param key contained key.
      * @param value contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public Pair(K key, V value) {
         this.key = key;
@@ -81,7 +83,7 @@ public class Pair<K, V> implements Serializable {
      *
      * @return contained key.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public K getKey() {
         return key;
@@ -92,7 +94,7 @@ public class Pair<K, V> implements Serializable {
      *
      * @param key contained key.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public void setKey(K key) {
         this.key = key;
@@ -103,7 +105,7 @@ public class Pair<K, V> implements Serializable {
      *
      * @return contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public V getValue() {
         return value;
@@ -114,7 +116,7 @@ public class Pair<K, V> implements Serializable {
      *
      * @param value contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public void setValue(V value) {
         this.value = value;

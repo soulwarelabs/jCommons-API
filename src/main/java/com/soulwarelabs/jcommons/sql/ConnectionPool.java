@@ -4,7 +4,7 @@
  *
  * File:     ConnectionPool.java
  * Folder:   /.../com/soulwarelabs/jcommons/sql
- * Revision: 1.01, 17 April 2014
+ * Revision: 1.02, 10 June 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -30,13 +30,15 @@ import java.sql.SQLException;
 
 /**
  * SQL database connection pool.
+ * <p>
+ * Designed to be thread-safe.
  *
  * @see Connection
  *
- * @since v1.0
+ * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 17 April 2014
+ * @version 10 June 2014
  */
 public interface ConnectionPool {
 
@@ -48,7 +50,7 @@ public interface ConnectionPool {
      *
      * @see Connection
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     Connection getConnection() throws SQLException;
 }

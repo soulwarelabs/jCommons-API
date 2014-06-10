@@ -4,7 +4,7 @@
  *
  * File:     Box.java
  * Folder:   /.../com/soulwarelabs/jcommons
- * Revision: 1.03, 17 April 2014
+ * Revision: 1.04, 10 June 2014
  * Created:  10 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -29,13 +29,15 @@ import java.io.Serializable;
 
 /**
  * Value container.
+ * <p>
+ * Designed to be logically comparable by the value.
  *
  * @param <T> value type.
  *
- * @since v1.0
+ * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 17 April 2014
+ * @version 10 June 2014
  */
 public class Box<T> implements Serializable {
 
@@ -44,7 +46,7 @@ public class Box<T> implements Serializable {
     /**
      * Creates a new instance of value container.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public Box() {
 
@@ -55,7 +57,7 @@ public class Box<T> implements Serializable {
      *
      * @param value contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public Box(T value) {
         this.value = value;
@@ -66,7 +68,7 @@ public class Box<T> implements Serializable {
      *
      * @return contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public T getValue() {
         return value;
@@ -77,7 +79,7 @@ public class Box<T> implements Serializable {
      *
      * @param value contained value.
      *
-     * @since v1.0
+     * @since v1.0.0
      */
     public void setValue(T value) {
         this.value = value;
