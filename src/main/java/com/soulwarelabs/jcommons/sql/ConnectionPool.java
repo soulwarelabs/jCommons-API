@@ -4,7 +4,7 @@
  *
  * File:     ConnectionPool.java
  * Folder:   /.../com/soulwarelabs/jcommons/sql
- * Revision: 1.02, 10 June 2014
+ * Revision: 1.03, 10 June 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -31,7 +31,11 @@ import java.sql.SQLException;
 /**
  * SQL database connection pool.
  * <p>
- * Designed to be thread-safe.
+ * The pool should be used to acquire SQL database connections either
+ * anonymously or by providing user / password pair. Since that some endpoint
+ * implementations may refuse to support both methods simultaneously.
+ * <p>
+ * Designed to be absolutely thread-safe.
  *
  * @see Connection
  *
@@ -53,4 +57,18 @@ public interface ConnectionPool {
      * @since v1.0.0
      */
     Connection getConnection() throws SQLException;
+
+    /**
+     * Gets an available SQL database connection from the pool.
+     *
+     * @param user SQL database user name.
+     * @param password SQL database user password.
+     * @return SQL database connection.
+     * @throws SQLException if no SQL connection is available.
+     *
+     * @see Connection
+     *
+     * @since v1.0.0
+     */
+    Connection getConnection(String user, String password) throws SQLException;
 }
