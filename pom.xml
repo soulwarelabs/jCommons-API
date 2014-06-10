@@ -6,9 +6,9 @@
 
     File:     pom.xml
     Folder:   /
-    Revision: 1.04, 17 April 2014
+    Revision: 1.05, 10 June 2014
     Created:  05 December 2013
-    Author:   Ilya Gubarev
+    Authors:  Ilya Gubarev
 
     Copyright (c) 2013-2014 Soulware Labs, Ltd.
     Contact information is available at http://www.soulwarelabs.com
@@ -31,6 +31,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <groupId>com.soulwarelabs.jcommons</groupId>
     <artifactId>jcommons-api</artifactId>
@@ -74,22 +80,12 @@
         <url>git@github.com:soulwarelabs/jcommons-api.git</url>
     </scm>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.java.source>1.5</versions.java.source>
         <versions.java.target>1.5</versions.java.target>
         <versions.plugins.compiler>3.1</versions.plugins.compiler>
+        <versions.plugins.gpg>1.5</versions.plugins.gpg>
         <versions.plugins.javadoc>2.9.1</versions.plugins.javadoc>
         <versions.plugins.source>2.2.1</versions.plugins.source>
     </properties>
@@ -128,6 +124,20 @@
                         <phase>verify</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${versions.plugins.gpg}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>

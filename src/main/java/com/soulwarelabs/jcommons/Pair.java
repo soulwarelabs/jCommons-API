@@ -6,7 +6,7 @@
  * Folder:   /.../com/soulwarelabs/jcommons
  * Revision: 1.01, 17 April 2014
  * Created:  14 February 2014
- * Author:   Ilya Gubarev
+ * Authors:  Ilya Gubarev
  *
  * Copyright (c) 2013-2014 Soulware Labs, Ltd.
  * Contact information is available at http://www.soulwarelabs.com
