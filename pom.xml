@@ -6,7 +6,7 @@
 
     File:     pom.xml
     Folder:   /
-    Revision: 1.07, 10 June 2014
+    Revision: 1.08, 11 June 2014
     Created:  05 December 2013
     Authors:  Ilya Gubarev
 
@@ -40,7 +40,7 @@
 
     <groupId>com.soulwarelabs.jcommons</groupId>
     <artifactId>jcommons-api</artifactId>
-    <version>1.0.0-beta-SNAPSHOT</version>
+    <version>1.0.0-beta</version>
     <packaging>jar</packaging>
 
     <name>jCommons-API</name>
