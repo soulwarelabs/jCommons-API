@@ -27,6 +27,8 @@ package com.soulwarelabs.jcommons.errors;
 
 import java.io.Serializable;
 
+import com.soulwarelabs.jcommons.Copyable;
+
 /**
  * Failure descriptor.
  * <p>
@@ -37,7 +39,7 @@ import java.io.Serializable;
  * @author Ilya Gubarev
  * @version 17 August 2014
  */
-public class Failure implements Serializable {
+public class Failure implements Copyable<Failure>, Serializable {
 
     /**
      * Creates a new copy of a failure descriptor.
@@ -137,13 +139,7 @@ public class Failure implements Serializable {
         this.title = title;
     }
 
-    /**
-     * Creates a new copy of the failure descriptor.
-     *
-     * @return copy of the failure descriptor.
-     *
-     * @since v1.1.0
-     */
+    @Override
     public Failure copy() {
         return copy(this);
     }
