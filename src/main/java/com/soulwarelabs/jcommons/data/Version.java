@@ -101,42 +101,6 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Gets a string presentation of version.
-     *
-     * @param version version descriptor.
-     * @return string presentation of the version.
-     * @throws NullPointerException if version is null.
-     *
-     * @since v1.1.0
-     */
-    public static StringBuilder print(Version version) {
-        if (version == null) {
-            throw new NullPointerException("version is null");
-        }
-        int length = version.getLength();
-        if (length == 0) {
-            return new StringBuilder("unknown");
-        }
-        StringBuilder result = new StringBuilder();
-        List<String> labels = version.labels;
-        List<Integer> numbers = version.numbers;
-        for (int index = 0; index < length; index++) {
-            result.append(numbers.get(index));
-            String label = labels.get(index);
-            if (label != null) {
-                result.append("-").append(label);
-            }
-            if (index < length - 1) {
-                result.append(".");
-            }
-        }
-        if (version.snapshot) {
-            result.append("-SNAPSHOT");
-        }
-        return result;
-    }
-
     private List<String> labels;
     private List<Integer> numbers;
     private boolean snapshot;
@@ -526,7 +490,25 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
 
     @Override
     public StringBuilder print() {
-        return print(this);
+        int length = numbers.size();
+        if (length == 0) {
+            return new StringBuilder("unknown");
+        }
+        StringBuilder result = new StringBuilder();
+        for (int index = 0; index < length; index++) {
+            result.append(numbers.get(index));
+            String label = labels.get(index);
+            if (label != null) {
+                result.append("-").append(label);
+            }
+            if (index < length - 1) {
+                result.append(".");
+            }
+        }
+        if (snapshot) {
+            result.append("-SNAPSHOT");
+        }
+        return result;
     }
 
     /**
