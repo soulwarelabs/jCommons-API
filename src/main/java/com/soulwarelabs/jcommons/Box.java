@@ -34,12 +34,14 @@ import java.io.Serializable;
  *
  * @param <T> value type.
  *
+ * @see Printable
+ *
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 10 June 2014
+ * @version 23 August 2014
  */
-public class Box<T> implements Serializable {
+public class Box<T> implements Printable, Serializable {
 
     /**
      * Creates a new value container.
@@ -107,8 +109,13 @@ public class Box<T> implements Serializable {
     }
 
     @Override
+    public StringBuilder print() {
+        return Pojo.print(value);
+    }
+
+    @Override
     public String toString() {
-        return String.format("%s", value);
+        return print().toString();
     }
 
     private T value;
