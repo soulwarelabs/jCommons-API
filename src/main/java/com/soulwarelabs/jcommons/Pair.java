@@ -26,11 +26,15 @@
 package com.soulwarelabs.jcommons;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Key-value container.
  * <p>
  * Designed to be logically comparable by the key.
+ *
+ * @see Printable
  *
  * @param <K> key type.
  * @param <V> value type.
@@ -38,9 +42,9 @@ import java.io.Serializable;
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 10 June 2014
+ * @version 23 August 2014
  */
-public class Pair<K, V> implements Serializable {
+public class Pair<K, V> implements Printable, Serializable {
 
     /**
      * Creates a key-value container.
@@ -141,9 +145,38 @@ public class Pair<K, V> implements Serializable {
         return result;
     }
 
+    /**
+     * Puts the pair into specified map.
+     *
+     * @param map target map.
+     *
+     * @since v1.1.0
+     */
+    public void intoMap(Map<? super K, ? super V> map) {
+        map.put(key, value);
+    }
+
+    @Override
+    public StringBuilder print() {
+        return Pojo.print(toMap());
+    }
+
+    /**
+     * Gets a mapped presentation of the pair.
+     *
+     * @return mapped presentation of the pair.
+     *
+     * @since v1.1.0
+     */
+    public Map<K, V> toMap() {
+        Map<K, V> result = new HashMap<K, V>();
+        result.put(key, value);
+        return result;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s: %s", key, value);
+        return print().toString();
     }
 
     private K key;
