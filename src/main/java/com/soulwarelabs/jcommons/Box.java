@@ -4,18 +4,18 @@
  *
  * File:     Box.java
  * Folder:   /.../com/soulwarelabs/jcommons
- * Revision: 1.04, 10 June 2014
+ * Revision: 1.05, 23 August 2014
  * Created:  10 February 2014
  * Authors:  Ilya Gubarev
  *
  * Copyright (c) 2013-2014 Soulware Labs, Ltd.
- * Contact information is available at http://www.soulwarelabs.com
+ * Contact information is available at "http://www.soulwarelabs.com".
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       "http://www.apache.org/licenses/LICENSE-2.0".
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,10 +41,8 @@ import java.io.Serializable;
  */
 public class Box<T> implements Serializable {
 
-    private T value;
-
     /**
-     * Creates a new instance of value container.
+     * Creates a new value container.
      *
      * @since v1.0.0
      */
@@ -112,4 +110,6 @@ public class Box<T> implements Serializable {
     public String toString() {
         return String.format("%s", value);
     }
+
+    private T value;
 }
