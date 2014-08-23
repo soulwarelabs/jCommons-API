@@ -429,9 +429,9 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         return appendNumber(number, label);
     }
 
-    // TODO: should be overridden
-    public <T> T copy() {
-        return (T) copy(this);
+    @Override
+    public Version copy() {
+        return copy(this);
     }
 
     @Override
@@ -524,7 +524,7 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         return result;
     }
 
-    // TODO: should be overridden
+    @Override
     public StringBuilder print() {
         return print(this);
     }
