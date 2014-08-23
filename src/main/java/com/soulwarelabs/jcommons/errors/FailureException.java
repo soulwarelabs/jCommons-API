@@ -4,18 +4,18 @@
  *
  * File:     FailureException.java
  * Folder:   /.../com/soulwarelabs/jcommons/errors
- * Revision: 1.00, 17 August 2014
+ * Revision: 1.01, 23 August 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
  * Copyright (c) 2013-2014 Soulware Labs, Ltd.
- * Contact information is available at http://www.soulwarelabs.com
+ * Contact information is available at "http://www.soulwarelabs.com".
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       "http://www.apache.org/licenses/LICENSE-2.0".
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,15 +31,14 @@ package com.soulwarelabs.jcommons.errors;
  * Occurs due to some functional failure.
  *
  * @see Failure
+ * @see RuntimeException
  *
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 17 August 2014
+ * @version 23 August 2014
  */
 public class FailureException extends RuntimeException {
-
-    private Failure failure;
 
     /**
      * Creates a new instance of exception.
@@ -69,6 +68,8 @@ public class FailureException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return failure != null ? failure.print() : null;
+        return failure != null ? failure.print().toString() : null;
     }
+
+    private Failure failure;
 }

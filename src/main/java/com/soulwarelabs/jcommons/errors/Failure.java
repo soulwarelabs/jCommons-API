@@ -4,18 +4,18 @@
  *
  * File:     Failure.java
  * Folder:   /.../com/soulwarelabs/jcommons/errors
- * Revision: 1.02, 23 August 2014
+ * Revision: 1.03, 23 August 2014
  * Created:  16 August 2014
  * Authors:  Ilya Gubarev
  *
  * Copyright (c) 2013-2014 Soulware Labs, Ltd.
- * Contact information is available at http://www.soulwarelabs.com
+ * Contact information is available at "http://www.soulwarelabs.com".
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       "http://www.apache.org/licenses/LICENSE-2.0".
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,27 +25,29 @@
  */
 package com.soulwarelabs.jcommons.errors;
 
-import java.io.Serializable;
-
-import com.soulwarelabs.jcommons.Copyable;
+import com.soulwarelabs.jcommons.Pojo;
+import com.soulwarelabs.jcommons.Printable;
 
 /**
  * Failure descriptor.
  * <p>
  * Designed to be logically comparable by the code.
  *
+ * @see Pojo
+ * @see Printable
+ *
  * @since v1.1.0
  *
  * @author Ilya Gubarev
  * @version 23 August 2014
  */
-public class Failure implements Copyable, Serializable {
+public class Failure extends Pojo implements Printable {
 
     /**
-     * Creates a new copy of a failure descriptor.
+     * Creates a new copy of failure descriptor.
      *
-     * @param failure a failure descriptor to be copied (optional).
-     * @return copy of the failure descriptor (optional).
+     * @param failure original failure descriptor (optional).
+     * @return copied failure descriptor (optional).
      *
      * @since v1.1.0
      */
@@ -60,12 +62,8 @@ public class Failure implements Copyable, Serializable {
         return result;
     }
 
-    private String code;
-    private String details;
-    private String title;
-
     /**
-     * Creates a new instance of failure descriptor.
+     * Creates a new failure descriptor.
      *
      * @since v1.1.0
      */ 
@@ -163,29 +161,28 @@ public class Failure implements Copyable, Serializable {
     public int hashCode() {
         int result = 7;
         result = result * 13 + (code != null ? code.hashCode() : 0);
-        result = result * 67 + (details != null ? details.hashCode() : 0);
-        result = result * 29 + (title != null ? title.hashCode() : 0);
+        result = result * 13 + (details != null ? details.hashCode() : 0);
+        result = result * 13 + (title != null ? title.hashCode() : 0);
         return result;
     }
 
-    /**
-     * Gets a text view of the failure.
-     *
-     * @return failure text view.
-     *
-     * @since v1.1.0
-     */
-    public String print() {
+    @Override
+    public StringBuilder print() {
         StringBuilder result = new StringBuilder();
         result.append(String.format("%s (%s)", title, code));
         if (details != null) {
             result.append(String.format(" - %s", details));
         }
-        return result.toString();
+        return result;
     }
 
     @Override
     public String toString() {
-        return print();
+        return print().toString();
     }
+
+    private String code;
+    private String details;
+    private String title;
+
 }
