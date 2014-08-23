@@ -4,7 +4,7 @@
  *
  * File:     Failure.java
  * Folder:   /.../com/soulwarelabs/jcommons/errors
- * Revision: 1.02, 17 August 2014
+ * Revision: 1.02, 23 August 2014
  * Created:  16 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -37,9 +37,9 @@ import com.soulwarelabs.jcommons.Copyable;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 17 August 2014
+ * @version 23 August 2014
  */
-public class Failure implements Copyable<Failure>, Serializable {
+public class Failure implements Copyable, Serializable {
 
     /**
      * Creates a new copy of a failure descriptor.
