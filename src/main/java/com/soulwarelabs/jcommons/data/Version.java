@@ -4,7 +4,7 @@
  *
  * File:     Version.java
  * Folder:   /.../com/soulwarelabs/jcommons/data
- * Revision: 1.07, 24 August 2014
+ * Revision: 1.08, 24 August 2014
  * Created:  10 May 2014
  * Authors:  Ilya Gubarev
  *
@@ -97,8 +97,25 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
      * @since v1.1.0
      */
     public static Version parse(String version) {
-        // TODO: implement version parsing
-        throw new UnsupportedOperationException();
+        if (version == null) {
+            throw new NullPointerException("version is null");
+        }
+        Version result = new Version();
+        String[] numbers = version.split(".");
+        for (int i = 0; i < numbers.length; i++) {
+            String parts[] = numbers[i].split("-");
+            int number = Integer.parseInt(parts[0]);
+            StringBuilder label = new StringBuilder();
+            for (int j = 1; j < parts.length; j++) {
+                if ((i < numbers.length - 1) && (j < parts.length - 1)){
+                    label.append("-").append(parts[j]);
+                } else {
+                    result.setSnapshot(parts[j].equalsIgnoreCase("SNAPSHOT"));
+                }
+            }
+            result.append(number, label.toString());
+        }
+        return result;
     }
 
     private List<String> labels;
