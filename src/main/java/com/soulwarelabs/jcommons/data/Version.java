@@ -4,7 +4,7 @@
  *
  * File:     Version.java
  * Folder:   /.../com/soulwarelabs/jcommons/data
- * Revision: 1.06, 23 August 2014
+ * Revision: 1.07, 24 August 2014
  * Created:  10 May 2014
  * Authors:  Ilya Gubarev
  *
@@ -43,7 +43,7 @@ import com.soulwarelabs.jcommons.Printable;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 24 August 2014
  */
 public class Version extends Pojo implements Comparable<Version>, Printable {
 
@@ -405,8 +405,30 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         if (version == null) {
             throw new NullPointerException("version is null");
         }
-        // TODO: impement version comparison
-        throw new UnsupportedOperationException();
+        for (int i = 0; i < numbers.size(); i++) {
+            if (i >= version.numbers.size()) {
+                return 1;
+            }
+            int numberDelta = numbers.get(i) - version.numbers.get(i);
+            if (numberDelta != 0) {
+                return numberDelta;
+            }
+            String label = labels.get(i);
+            String sampleLabel = version.labels.get(i);
+            if (label == null ^ sampleLabel == null) {
+                return label == null ? 1 : -1;
+            }
+            if (label != null) {
+                int labelDelta = label.compareToIgnoreCase(sampleLabel);
+                if (labelDelta != 0) {
+                    return labelDelta;
+                }
+            }
+        }
+        if (snapshot ^ version.snapshot) {
+            return snapshot ? -1 : 1;
+        }
+        return 0;
     }
 
     /**
