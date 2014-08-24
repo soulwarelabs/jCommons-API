@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Pair.java
- * Folder:   /.../com/soulwarelabs/jcommons
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.03, 23 August 2014
  * Created:  14 February 2014
  * Authors:  Ilya Gubarev

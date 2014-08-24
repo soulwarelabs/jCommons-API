@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     SecretField.java
- * Folder:   /.../com/soulwarelabs/jcommons/namings
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/namings
  * Revision: 1.01, 23 August 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev

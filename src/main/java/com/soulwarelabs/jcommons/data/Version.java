@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Version.java
- * Folder:   /.../com/soulwarelabs/jcommons/data
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/data
  * Revision: 1.08, 24 August 2014
  * Created:  10 May 2014
  * Authors:  Ilya Gubarev

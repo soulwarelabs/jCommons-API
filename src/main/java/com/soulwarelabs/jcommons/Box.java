@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Box.java
- * Folder:   /.../com/soulwarelabs/jcommons
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.05, 23 August 2014
  * Created:  10 February 2014
  * Authors:  Ilya Gubarev

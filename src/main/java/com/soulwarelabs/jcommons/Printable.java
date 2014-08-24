@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Printable.java
- * Folder:   /.../com/soulwarelabs/jcommons
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.02, 23 August 2014
  * Created:  18 August 2014
  * Authors:  Ilya Gubarev

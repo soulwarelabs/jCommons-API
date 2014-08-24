@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Credentials.java
- * Folder:   /.../com/soulwarelabs/jcommons/data
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/data
  * Revision: 1.01, 24 August 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev

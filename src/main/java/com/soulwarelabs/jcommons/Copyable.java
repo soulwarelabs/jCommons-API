@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Copyable.java
- * Folder:   /.../com/soulwarelabs/jcommons
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.01, 23 August 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev

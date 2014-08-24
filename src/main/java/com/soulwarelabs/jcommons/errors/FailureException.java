@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     FailureException.java
- * Folder:   /.../com/soulwarelabs/jcommons/errors
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/errors
  * Revision: 1.01, 23 August 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
