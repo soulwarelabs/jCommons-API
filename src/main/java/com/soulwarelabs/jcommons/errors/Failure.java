@@ -138,8 +138,10 @@ public class Failure extends Pojo implements Printable {
     }
 
     @Override
-    public Failure copy() {
-        return copy(this);
+    @SuppressWarnings({"unchecked"})
+    public <T> T copy() {
+         // NOTE: possible exception is documented for Copyable.copy()
+        return (T) copy(this);
     }
 
     @Override

@@ -124,8 +124,10 @@ public class Credentials extends Pojo {
     }
 
     @Override
-    public Credentials copy() {
-        return copy(this);
+    @SuppressWarnings({"unchecked"})
+    public <T> T copy() {
+         // NOTE: possible exception is documented for Copyable.copy()
+        return (T) copy(this);
     }
 
     @Override

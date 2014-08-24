@@ -390,8 +390,10 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
     }
 
     @Override
-    public Version copy() {
-        return copy(this);
+    @SuppressWarnings({"unchecked"})
+    public <T> T copy() {
+         // NOTE: possible exception is documented for Copyable.copy()
+        return (T) copy(this);
     }
 
     @Override
