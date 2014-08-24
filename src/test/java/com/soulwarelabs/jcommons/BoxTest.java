@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     BoxTest.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons
+ * Folder:   src/test/java/com/soulwarelabs/jcommons
  * Revision: 1.00, 24 August 2014
  * Created:  24 August 2014
  * Authors:  Ilya Gubarev
