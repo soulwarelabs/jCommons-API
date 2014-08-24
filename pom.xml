@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Project:  jCommons-API
+    Project:  jCommons API
     Outline:  jCommons framework API components
 
     File:     pom.xml
     Folder:   /
-    Revision: 1.10, 17 August 2014
+    Revision: 1.11, 24 August 2014
     Created:  05 December 2013
     Authors:  Ilya Gubarev
 
     Copyright (c) 2013-2014 Soulware Labs, Ltd.
-    Contact information is available at http://www.soulwarelabs.com
+    Contact information is available at "http://www.soulwarelabs.com".
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+          "http://www.apache.org/licenses/LICENSE-2.0".
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,9 +33,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <groupId>com.soulwarelabs.sonatype</groupId>
+        <artifactId>sonatype-parent</artifactId>
+        <version>1.0.0-alpha</version>
     </parent>
 
     <groupId>com.soulwarelabs.jcommons</groupId>
@@ -83,126 +83,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.java.source>1.5</versions.java.source>
         <versions.java.target>1.5</versions.java.target>
-        <versions.plugins.compiler>3.1</versions.plugins.compiler>
-        <versions.plugins.gpg>1.5</versions.plugins.gpg>
-        <versions.plugins.javadoc>2.9.1</versions.plugins.javadoc>
-        <versions.plugins.source>2.2.1</versions.plugins.source>
     </properties>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${versions.plugins.compiler}</version>
-                    <configuration>
-                        <source>${versions.java.source}</source>
-                        <target>${versions.java.target}</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${versions.plugins.javadoc}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>                
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>${versions.plugins.gpg}</version>
-                    <executions>
-                        <execution>
-                            <id>sign-artifacts</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${versions.plugins.source}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${versions.java.source}</source>
+                    <target>${versions.java.target}</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>build-javadocs</id>
-            <activation>
-                <property>
-                    <name>option-build-javadocs</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>build-sources</id>
-            <activation>
-                <property>
-                    <name>option-build-sources</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>build-signup</id>
-            <activation>
-                <property>
-                    <name>option-build-signup</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
