@@ -12,5 +12,9 @@
 # Java VM crashlogs:
 hs_err_pid*
 
-# Maven target directory:
-/target/
+# Maven:
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
