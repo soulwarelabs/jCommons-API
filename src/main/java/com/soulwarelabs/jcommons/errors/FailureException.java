@@ -40,6 +40,8 @@ package com.soulwarelabs.jcommons.errors;
  */
 public class FailureException extends RuntimeException {
 
+    private Failure failure;
+
     /**
      * Creates a new instance of exception.
      *
@@ -70,6 +72,4 @@ public class FailureException extends RuntimeException {
     public String getMessage() {
         return failure != null ? failure.print().toString() : null;
     }
-
-    private Failure failure;
 }

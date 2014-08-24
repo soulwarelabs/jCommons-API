@@ -101,6 +101,10 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         throw new UnsupportedOperationException();
     }
 
+    private List<String> labels;
+    private List<Integer> numbers;
+    private boolean snapshot;
+
     /**
      * Creates a new version descriptor.
      *
@@ -566,10 +570,6 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
     public String toString() {
         return print().toString();
     }
-
-    private List<String> labels;
-    private List<Integer> numbers;
-    private boolean snapshot;
 
     private Version appendNumber(int number, String label) {
         labels.add(label);

@@ -57,6 +57,9 @@ public class Credentials extends Pojo {
         return new Credentials(credentials.login, credentials.password);
     }
 
+    private String login;
+    private @SecretField String password;
+
     /**
      * Creates a new authentication pair.
      *
@@ -156,7 +159,4 @@ public class Credentials extends Pojo {
         result = 29 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
-
-    private String login;
-    private @SecretField String password;
 }

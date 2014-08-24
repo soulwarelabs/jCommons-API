@@ -43,6 +43,8 @@ import java.io.Serializable;
  */
 public class Box<T> implements Printable, Serializable {
 
+    private T value;
+
     /**
      * Creates a new value container.
      *
@@ -117,6 +119,4 @@ public class Box<T> implements Printable, Serializable {
     public String toString() {
         return print().toString();
     }
-
-    private T value;
 }

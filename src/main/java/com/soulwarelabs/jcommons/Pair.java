@@ -46,6 +46,9 @@ import java.util.Map;
  */
 public class Pair<K, V> implements Printable, Serializable {
 
+    private K key;
+    private V value;
+
     /**
      * Creates a key-value container.
      *
@@ -178,7 +181,4 @@ public class Pair<K, V> implements Printable, Serializable {
     public String toString() {
         return print().toString();
     }
-
-    private K key;
-    private V value;
 }

@@ -58,15 +58,6 @@ public abstract class Pojo implements Copyable, Serializable {
         return print(object, false);
     }
 
-    /**
-     * Creates a new data structure.
-     *
-     * @since v1.1.0
-     */
-    public Pojo() {
-
-    }
-
     private static StringBuilder print(Object object, boolean unbrace) {
         if (object == null) {
             return printNull();
@@ -128,6 +119,15 @@ public abstract class Pojo implements Copyable, Serializable {
         } else {
             return new StringBuilder("\"").append(text).append("\"");
         }
+    }
+
+    /**
+     * Creates a new data structure.
+     *
+     * @since v1.1.0
+     */
+    public Pojo() {
+
     }
 
     private Map<String, Object> getPojoFields() {

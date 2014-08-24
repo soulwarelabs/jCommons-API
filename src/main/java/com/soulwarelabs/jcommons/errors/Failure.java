@@ -62,6 +62,10 @@ public class Failure extends Pojo implements Printable {
         return result;
     }
 
+    private String code;
+    private String details;
+    private String title;
+
     /**
      * Creates a new failure descriptor.
      *
@@ -182,9 +186,4 @@ public class Failure extends Pojo implements Printable {
     public String toString() {
         return print().toString();
     }
-
-    private String code;
-    private String details;
-    private String title;
-
 }
