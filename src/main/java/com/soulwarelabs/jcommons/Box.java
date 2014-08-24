@@ -8,7 +8,7 @@
  * Created:  10 February 2014
  * Authors:  Ilya Gubarev
  *
- * Copyright (c) 2013-2014 Soulware Labs, Ltd.
+ * Copyright (c) 2014 Soulware Labs, Ltd.
  * Contact information is available at "http://www.soulwarelabs.com".
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
