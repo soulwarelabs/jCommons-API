@@ -83,7 +83,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.java.source>1.5</versions.java.source>
         <versions.java.target>1.5</versions.java.target>
+        <versions.libs.junit>4.11</versions.libs.junit>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${versions.libs.junit}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
