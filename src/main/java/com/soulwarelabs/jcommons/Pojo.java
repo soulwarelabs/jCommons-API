@@ -1,5 +1,5 @@
 /*
- * Project:  jCommons-API
+ * Project:  jCommons API
  * Outline:  jCommons framework API components
  *
  * File:     Pojo.java
