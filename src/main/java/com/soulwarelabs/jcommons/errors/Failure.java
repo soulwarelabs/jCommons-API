@@ -62,6 +62,28 @@ public class Failure extends Pojo implements Printable {
         return result;
     }
 
+    /**
+     * Creates a new failure descriptor based on its string presentation.
+     *
+     * @param failure string presentation of a failure.
+     * @return failure descriptor.
+     * @throws RuntimeException if error occurs while parsing the failure.
+     *
+     * @since v1.1.0
+     */
+    public static Failure parse(String failure) {
+        Failure result = new Failure();
+        int dash = failure.indexOf("-");
+        int leftBracet = failure.indexOf("(");
+        int rightBracet = failure.indexOf(")");
+        result.title = failure.substring(0, leftBracet).trim();
+        result.code = failure.substring(leftBracet + 1, rightBracet).trim();
+        if (dash > 0) {
+            result.details = failure.substring(dash + 1).trim();
+        }
+        return result;
+    }
+
     private String code;
     private String details;
     private String title;
