@@ -6,7 +6,7 @@
 
     File:     pom.xml
     Folder:   /
-    Revision: 1.11, 24 August 2014
+    Revision: 1.12, 27 August 2014
     Created:  05 December 2013
     Authors:  Ilya Gubarev
 
@@ -35,7 +35,7 @@
     <parent>
         <groupId>com.soulwarelabs.sonatype</groupId>
         <artifactId>sonatype-parent</artifactId>
-        <version>1.0.0-alpha</version>
+        <version>1.0.0-beta</version>
     </parent>
 
     <groupId>com.soulwarelabs.jcommons</groupId>
@@ -83,19 +83,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.java.source>1.5</versions.java.source>
         <versions.java.target>1.5</versions.java.target>
-        <versions.libs.junit>4.11</versions.libs.junit>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${versions.libs.junit}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
