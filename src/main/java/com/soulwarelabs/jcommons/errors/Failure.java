@@ -73,9 +73,9 @@ public class Failure extends Pojo implements Printable {
      */
     public static Failure parse(String failure) {
         Failure result = new Failure();
-        int dash = failure.indexOf("-");
-        int leftBracet = failure.indexOf("(");
-        int rightBracet = failure.indexOf(")");
+        int dash = failure.indexOf('-');
+        int leftBracet = failure.indexOf('(');
+        int rightBracet = failure.indexOf(')');
         result.title = failure.substring(0, leftBracet).trim();
         result.code = failure.substring(leftBracet + 1, rightBracet).trim();
         if (dash > 0) {

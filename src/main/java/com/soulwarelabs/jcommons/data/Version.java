@@ -108,7 +108,7 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
             StringBuilder label = new StringBuilder();
             for (int j = 1; j < parts.length; j++) {
                 if ((i < numbers.length - 1) && (j < parts.length - 1)){
-                    label.append("-").append(parts[j]);
+                    label.append('-').append(parts[j]);
                 } else {
                     result.setSnapshot(parts[j].equalsIgnoreCase("SNAPSHOT"));
                 }
@@ -540,10 +540,10 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
             result.append(numbers.get(index));
             String label = labels.get(index);
             if (label != null) {
-                result.append("-").append(label);
+                result.append('-').append(label);
             }
             if (index < length - 1) {
-                result.append(".");
+                result.append('.');
             }
         }
         if (snapshot) {
