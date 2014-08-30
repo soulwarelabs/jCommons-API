@@ -4,7 +4,7 @@
  *
  * File:     Version.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/data
- * Revision: 1.08, 24 August 2014
+ * Revision: 1.09, 30 August 2014
  * Created:  10 May 2014
  * Authors:  Ilya Gubarev
  *
@@ -43,7 +43,7 @@ import com.soulwarelabs.jcommons.Printable;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 24 August 2014
+ * @version 30 August 2014
  */
 public class Version extends Pojo implements Comparable<Version>, Printable {
 
@@ -603,11 +603,6 @@ public class Version extends Pojo implements Comparable<Version>, Printable {
         labels.set(--index, label);
         numbers.set(index, number);
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return print().toString();
     }
 
     private Version appendNumber(int number, String label) {

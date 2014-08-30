@@ -4,7 +4,7 @@
  *
  * File:     Failure.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/errors
- * Revision: 1.03, 23 August 2014
+ * Revision: 1.04, 30 August 2014
  * Created:  16 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -39,7 +39,7 @@ import com.soulwarelabs.jcommons.Printable;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 30 August 2014
  */
 public class Failure extends Pojo implements Printable {
 
@@ -202,10 +202,5 @@ public class Failure extends Pojo implements Printable {
             result.append(String.format(" - %s", details));
         }
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return print().toString();
     }
 }

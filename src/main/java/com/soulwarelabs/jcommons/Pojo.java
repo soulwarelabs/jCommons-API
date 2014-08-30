@@ -4,7 +4,7 @@
  *
  * File:     Pojo.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.02, 23 August 2014
+ * Revision: 1.03, 30 August 2014
  * Created:  15 July 2014
  * Authors:  Ilya Gubarev
  *
@@ -42,7 +42,7 @@ import com.soulwarelabs.jcommons.namings.SecretField;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 30 August 2014
  */
 public abstract class Pojo implements Copyable, Serializable {
 
@@ -155,5 +155,10 @@ public abstract class Pojo implements Copyable, Serializable {
             type = type.getSuperclass();
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return print(this).toString();
     }
 }

@@ -4,7 +4,7 @@
  *
  * File:     Pair.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.03, 23 August 2014
+ * Revision: 1.04, 30 August 2014
  * Created:  14 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -42,7 +42,7 @@ import java.util.Map;
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 30 August 2014
  */
 public class Pair<K, V> implements Printable, Serializable {
 
@@ -175,10 +175,5 @@ public class Pair<K, V> implements Printable, Serializable {
         Map<K, V> result = new HashMap<K, V>();
         result.put(key, value);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return print().toString();
     }
 }

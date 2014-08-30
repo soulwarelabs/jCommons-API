@@ -4,7 +4,7 @@
  *
  * File:     Box.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.05, 23 August 2014
+ * Revision: 1.06, 30 August 2014
  * Created:  10 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -39,7 +39,7 @@ import java.io.Serializable;
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 30 August 2014
  */
 public class Box<T> implements Printable, Serializable {
 
@@ -113,10 +113,5 @@ public class Box<T> implements Printable, Serializable {
     @Override
     public StringBuilder print() {
         return Pojo.print(value);
-    }
-
-    @Override
-    public String toString() {
-        return print().toString();
     }
 }
