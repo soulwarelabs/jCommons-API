@@ -4,7 +4,7 @@
  *
  * File:     ConnectionPool.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/sql
- * Revision: 1.04, 23 August 2014
+ * Revision: 1.05, 30 August 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -28,6 +28,8 @@ package com.soulwarelabs.jcommons.sql;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.soulwarelabs.jcommons.data.Credentials;
+
 /**
  * SQL database connection pool.
  * <p>
@@ -42,7 +44,7 @@ import java.sql.SQLException;
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 10 June 2014
+ * @version 30 August 2014
  */
 public interface ConnectionPool {
 
@@ -57,6 +59,20 @@ public interface ConnectionPool {
      * @since v1.0.0
      */
     Connection getConnection() throws SQLException;
+
+    /**
+     * Gets an available SQL database connection from the pool.
+     *
+     * @param credentials user authentication pair.
+     * @return SQL database connection.
+     * @throws SQLException if no SQL connection is available.
+     *
+     * @see Connection
+     * @see Credentials
+     *
+     * @since v1.1.0
+     */
+    Connection getConnection(Credentials credentials) throws SQLException;
 
     /**
      * Gets an available SQL database connection from the pool.
