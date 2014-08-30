@@ -40,7 +40,7 @@
 
     <groupId>com.soulwarelabs.jcommons</groupId>
     <artifactId>jcommons-api</artifactId>
-    <version>1.1.0-beta-snapshot</version>
+    <version>1.1.0-beta-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>jCommons-API</name>
