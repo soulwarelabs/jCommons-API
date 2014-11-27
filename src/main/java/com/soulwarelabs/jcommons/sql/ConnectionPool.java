@@ -4,7 +4,7 @@
  *
  * File:     ConnectionPool.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/sql
- * Revision: 1.05, 30 August 2014
+ * Revision: 2.01, 27 November 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -26,9 +26,6 @@
 package com.soulwarelabs.jcommons.sql;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-
-import com.soulwarelabs.jcommons.data.Credentials;
 
 /**
  * SQL database connection pool.
@@ -37,14 +34,14 @@ import com.soulwarelabs.jcommons.data.Credentials;
  * anonymously or by providing user / password pair. Since that some endpoint
  * implementations may refuse to support both methods simultaneously.
  * <p>
- * Designed to be absolutely thread-safe.
+ * Designed to be thread-safe.
  *
  * @see Connection
  *
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 30 August 2014
+ * @version 27 November 2014
  */
 public interface ConnectionPool {
 
@@ -52,27 +49,13 @@ public interface ConnectionPool {
      * Gets an available SQL database connection from the pool.
      *
      * @return SQL database connection.
-     * @throws SQLException if no SQL connection is available.
+     * @throws RuntimeException if error occurs while acquiring the connection.
      *
      * @see Connection
      *
-     * @since v1.0.0
+     * @since v2.0.0
      */
-    Connection getConnection() throws SQLException;
-
-    /**
-     * Gets an available SQL database connection from the pool.
-     *
-     * @param credentials user authentication pair.
-     * @return SQL database connection.
-     * @throws SQLException if no SQL connection is available.
-     *
-     * @see Connection
-     * @see Credentials
-     *
-     * @since v1.1.0
-     */
-    Connection getConnection(Credentials credentials) throws SQLException;
+    Connection getConnection();
 
     /**
      * Gets an available SQL database connection from the pool.
@@ -80,11 +63,11 @@ public interface ConnectionPool {
      * @param user SQL database user name.
      * @param password SQL database user password.
      * @return SQL database connection.
-     * @throws SQLException if no SQL connection is available.
+     * @throws RuntimeException if error occurs while acquiring the connection.
      *
      * @see Connection
      *
-     * @since v1.0.0
+     * @since v2.0.0
      */
-    Connection getConnection(String user, String password) throws SQLException;
+    Connection getConnection(String user, String password);
 }
