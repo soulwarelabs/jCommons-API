@@ -4,7 +4,7 @@
  *
  * File:     FailureException.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/errors
- * Revision: 1.01, 23 August 2014
+ * Revision: 1.02, 27 November 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,6 +25,8 @@
  */
 package com.soulwarelabs.jcommons.errors;
 
+import com.soulwarelabs.jcommons.data.Failure;
+
 /**
  * Runtime exception.
  * <p>
@@ -36,11 +38,11 @@ package com.soulwarelabs.jcommons.errors;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 27 November 2014
  */
 public class FailureException extends RuntimeException {
 
-    private Failure failure;
+    private final Failure failure;
 
     /**
      * Creates a new instance of exception.
@@ -52,6 +54,21 @@ public class FailureException extends RuntimeException {
      * @since v1.1.0
      */
     public FailureException(Failure failure) {
+        this.failure = failure;
+    }
+
+    /**
+     * Creates a new instance of exception.
+     *
+     * @param failure an initial failure.
+     * @param cause an initial exception.
+     *
+     * @see Failure
+     *
+     * @since v2.0.0
+     */
+    public FailureException(Failure failure, Throwable cause) {
+        super(cause);
         this.failure = failure;
     }
 
