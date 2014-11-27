@@ -2,9 +2,9 @@
  * Project:  jCommons API
  * Outline:  jCommons framework API components
  *
- * File:     HiddenField.java
+ * File:     Secret.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/namings
- * Revision: 1.01, 23 August 2014
+ * Revision: 1.02, 27 November 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,21 +25,25 @@
  */
 package com.soulwarelabs.jcommons.namings;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Hidden data structure field.
+ * Secret data structure member.
  *
- * @since v1.1.0
+ * @since v2.0.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 27 November 2014
  */
-@Target(ElementType.FIELD)
+@Inherited
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface HiddenField {
+@Target({ElementType.FIELD, ElementType.METHOD})
+public @interface Secret {
 
 }

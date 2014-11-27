@@ -26,7 +26,7 @@
 package com.soulwarelabs.jcommons.data;
 
 import com.soulwarelabs.jcommons.Pojo;
-import com.soulwarelabs.jcommons.namings.SecretField;
+import com.soulwarelabs.jcommons.namings.Secret;
 
 /**
  * Authentication pair.
@@ -58,7 +58,7 @@ public class Credentials extends Pojo {
     }
 
     private String login;
-    private @SecretField String password;
+    private @Secret String password;
 
     /**
      * Creates a new authentication pair.

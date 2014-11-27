@@ -31,8 +31,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.soulwarelabs.jcommons.namings.HiddenField;
-import com.soulwarelabs.jcommons.namings.SecretField;
+import com.soulwarelabs.jcommons.namings.Hidden;
+import com.soulwarelabs.jcommons.namings.Secret;
 
 /**
  * Data structure.
@@ -136,11 +136,11 @@ public abstract class Pojo implements Copyable, Serializable {
         while (type != Pojo.class) {
             for (Field field : type.getDeclaredFields()) {
                 try {
-                    if (field.isAnnotationPresent(HiddenField.class)) {
+                    if (field.isAnnotationPresent(Hidden.class)) {
                         continue;
                     }
                     Object value;
-                    if (field.isAnnotationPresent(SecretField.class)) {
+                    if (field.isAnnotationPresent(Secret.class)) {
                         value = "*";
                     } else {
                         field.setAccessible(true);
