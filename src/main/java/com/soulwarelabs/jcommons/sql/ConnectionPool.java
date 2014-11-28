@@ -4,7 +4,7 @@
  *
  * File:     ConnectionPool.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons/sql
- * Revision: 2.01, 27 November 2014
+ * Revision: 2.02, 28 November 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
  *
@@ -30,10 +30,6 @@ import java.sql.Connection;
 /**
  * SQL database connection pool.
  * <p>
- * The pool should be used to acquire SQL database connections either
- * anonymously or by providing user / password pair. Since that some endpoint
- * implementations may refuse to support both methods simultaneously.
- * <p>
  * Designed to be thread-safe.
  *
  * @see Connection
@@ -41,7 +37,7 @@ import java.sql.Connection;
  * @since v1.0.0
  *
  * @author Ilya Gubarev
- * @version 27 November 2014
+ * @version 28 November 2014
  */
 public interface ConnectionPool {
 
@@ -56,18 +52,4 @@ public interface ConnectionPool {
      * @since v2.0.0
      */
     Connection getConnection();
-
-    /**
-     * Gets an available SQL database connection from the pool.
-     *
-     * @param user SQL database user name.
-     * @param password SQL database user password.
-     * @return SQL database connection.
-     * @throws RuntimeException if error occurs while acquiring the connection.
-     *
-     * @see Connection
-     *
-     * @since v2.0.0
-     */
-    Connection getConnection(String user, String password);
 }
