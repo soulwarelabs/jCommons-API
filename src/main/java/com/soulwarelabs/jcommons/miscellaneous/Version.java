@@ -3,8 +3,8 @@
  * Outline:  jCommons framework API components
  *
  * File:     Version.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/data
- * Revision: 1.09, 30 August 2014
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/miscellaneous
+ * Revision: 1.10, 28 November 2014
  * Created:  10 May 2014
  * Authors:  Ilya Gubarev
  *
@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soulwarelabs.jcommons.data;
+package com.soulwarelabs.jcommons.miscellaneous;
 
 import java.util.LinkedList;
 import java.util.List;
