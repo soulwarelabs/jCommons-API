@@ -31,8 +31,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.soulwarelabs.jcommons.namings.Hidden;
-import com.soulwarelabs.jcommons.namings.Secret;
 
 /**
  * Data structure.

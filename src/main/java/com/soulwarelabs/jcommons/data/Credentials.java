@@ -26,7 +26,7 @@
 package com.soulwarelabs.jcommons.data;
 
 import com.soulwarelabs.jcommons.Pojo;
-import com.soulwarelabs.jcommons.namings.Secret;
+import com.soulwarelabs.jcommons.Secret;
 
 /**
  * Authentication pair.

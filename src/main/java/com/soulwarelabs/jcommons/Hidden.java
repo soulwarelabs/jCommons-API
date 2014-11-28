@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soulwarelabs.jcommons.namings;
+package com.soulwarelabs.jcommons;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
