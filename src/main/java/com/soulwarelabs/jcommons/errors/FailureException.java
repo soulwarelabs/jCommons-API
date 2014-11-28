@@ -25,8 +25,6 @@
  */
 package com.soulwarelabs.jcommons.errors;
 
-import com.soulwarelabs.jcommons.data.Failure;
-
 /**
  * Runtime exception.
  * <p>
