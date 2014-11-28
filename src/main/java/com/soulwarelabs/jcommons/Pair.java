@@ -161,7 +161,7 @@ public class Pair<K, V> implements Printable, Serializable {
 
     @Override
     public StringBuilder print() {
-        return Pojo.print(toMap());
+        return Structure.print(toMap());
     }
 
     /**

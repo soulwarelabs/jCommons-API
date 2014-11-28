@@ -25,7 +25,7 @@
  */
 package com.soulwarelabs.jcommons.errors;
 
-import com.soulwarelabs.jcommons.Pojo;
+import com.soulwarelabs.jcommons.Structure;
 import com.soulwarelabs.jcommons.Printable;
 
 /**
@@ -41,7 +41,7 @@ import com.soulwarelabs.jcommons.Printable;
  * @author Ilya Gubarev
  * @version 30 August 2014
  */
-public class Failure extends Pojo implements Printable {
+public class Failure extends Structure implements Printable {
 
     /**
      * Creates a new copy of failure descriptor.

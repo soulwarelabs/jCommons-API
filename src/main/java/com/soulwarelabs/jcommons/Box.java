@@ -112,6 +112,6 @@ public class Box<T> implements Printable, Serializable {
 
     @Override
     public StringBuilder print() {
-        return Pojo.print(value);
+        return Structure.print(value);
     }
 }

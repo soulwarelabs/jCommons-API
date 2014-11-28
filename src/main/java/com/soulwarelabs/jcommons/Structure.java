@@ -2,9 +2,9 @@
  * Project:  jCommons API
  * Outline:  jCommons framework API components
  *
- * File:     Pojo.java
+ * File:     Structure.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.03, 30 August 2014
+ * Revision: 1.04, 28 November 2014
  * Created:  15 July 2014
  * Authors:  Ilya Gubarev
  *
@@ -31,18 +31,17 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 /**
- * Data structure.
+ * Plain data structure.
  *
  * @see Copyable
  *
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 30 August 2014
+ * @version 28 November 2014
  */
-public abstract class Pojo implements Copyable, Serializable {
+public abstract class Structure implements Copyable, Serializable {
 
     /**
      * Gets a string presentation of specified object.
@@ -69,8 +68,8 @@ public abstract class Pojo implements Copyable, Serializable {
         if (object instanceof Printable) {
             return printText(((Printable) object).print(), unbrace);
         }
-        if (object instanceof Pojo) {
-            return printPojo(((Pojo) object));
+        if (object instanceof Structure) {
+            return printPojo(((Structure) object));
         }
         if (object instanceof CharSequence) {
             return printText((CharSequence) object, unbrace);
@@ -107,7 +106,7 @@ public abstract class Pojo implements Copyable, Serializable {
         return new StringBuilder("null");
     }
 
-    private static StringBuilder printPojo(Pojo pojo) {
+    private static StringBuilder printPojo(Structure pojo) {
         return printMap(pojo.getPojoFields());
     }
 
@@ -124,14 +123,14 @@ public abstract class Pojo implements Copyable, Serializable {
      *
      * @since v1.1.0
      */
-    public Pojo() {
+    public Structure() {
 
     }
 
     private Map<String, Object> getPojoFields() {
         Map<String, Object> result = new LinkedHashMap<String, Object>(); 
         Class<?> type = getClass();
-        while (type != Pojo.class) {
+        while (type != Structure.class) {
             for (Field field : type.getDeclaredFields()) {
                 try {
                     if (field.isAnnotationPresent(Hidden.class)) {

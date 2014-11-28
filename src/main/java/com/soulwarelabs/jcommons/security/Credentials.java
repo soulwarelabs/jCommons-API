@@ -25,7 +25,7 @@
  */
 package com.soulwarelabs.jcommons.security;
 
-import com.soulwarelabs.jcommons.Pojo;
+import com.soulwarelabs.jcommons.Structure;
 import com.soulwarelabs.jcommons.Secret;
 
 /**
@@ -40,7 +40,7 @@ import com.soulwarelabs.jcommons.Secret;
  * @author Ilya Gubarev
  * @version 24 August 2014
  */
-public class Credentials extends Pojo {
+public class Credentials extends Structure {
 
     /**
      * Creates a new copy of authentication pair.

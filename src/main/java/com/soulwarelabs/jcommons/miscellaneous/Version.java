@@ -28,7 +28,7 @@ package com.soulwarelabs.jcommons.miscellaneous;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.soulwarelabs.jcommons.Pojo;
+import com.soulwarelabs.jcommons.Structure;
 import com.soulwarelabs.jcommons.Printable;
 
 /**
@@ -45,7 +45,7 @@ import com.soulwarelabs.jcommons.Printable;
  * @author Ilya Gubarev
  * @version 30 August 2014
  */
-public class Version extends Pojo implements Comparable<Version>, Printable {
+public class Version extends Structure implements Comparable<Version>, Printable {
 
     /**
      * Index of a major version number.
