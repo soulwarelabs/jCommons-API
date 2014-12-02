@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Pair.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/miscellaneous
  * Revision: 1.04, 30 August 2014
  * Created:  14 February 2014
  * Authors:  Ilya Gubarev
@@ -23,8 +23,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soulwarelabs.jcommons;
+package com.soulwarelabs.jcommons.miscellaneous;
 
+import com.soulwarelabs.jcommons.Printable;
+import com.soulwarelabs.jcommons.Structure;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
