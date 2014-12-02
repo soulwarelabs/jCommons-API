@@ -4,7 +4,7 @@
  *
  * File:     Copyable.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.01, 23 August 2014
+ * Revision: 1.02, 03 December 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -31,7 +31,7 @@ package com.soulwarelabs.jcommons;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 23 August 2014
+ * @version 03 December 2014
  */
 public interface Copyable {
 
@@ -40,7 +40,7 @@ public interface Copyable {
      *
      * @param <T> object type.
      * @return copy of the object.
-     * @throws ClassCastException if specified object type is illegal.
+     * @throws RuntimeException if error occurs while copying object.
      *
      * @since v1.1.0
      */
