@@ -2,7 +2,7 @@ package com.soulwarelabs.jcommons;
 
 public abstract class Unique<T> extends Nominated implements Identifiable<T> {
 
-    private @Key T id;
+    private T id;
 
     public Unique() {
 
@@ -13,6 +13,7 @@ public abstract class Unique<T> extends Nominated implements Identifiable<T> {
         this.id = id;
     }
 
+    @Key
     public T getId() {
         return id;
     }

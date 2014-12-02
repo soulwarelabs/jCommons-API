@@ -4,7 +4,7 @@
  *
  * File:     Structure.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.05, 03 December 2014
+ * Revision: 1.06, 03 December 2014
  * Created:  15 July 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,12 +25,14 @@
  */
 package com.soulwarelabs.jcommons;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,10 +48,20 @@ import java.util.Map;
  */
 public abstract class Structure implements Copyable, Printable, Serializable {
 
-    private final static Map<Class, Collection<Field>> FIELDS;
+    private static class Property {
+
+        private Method accessor;
+        private Method mutator;
+        private String name;
+        private boolean hidden;
+        private boolean key;
+        private boolean secret;
+    }
+
+    private final static Map<Class, Map<String, Property>> PROPERTIES;
 
     static {
-        FIELDS = new HashMap<Class, Collection<Field>>();
+        PROPERTIES = new HashMap<Class, Map<String, Property>>();
     }
 
     @SuppressWarnings({"unchecked"})
@@ -81,20 +93,29 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         return print(object, false);
     }
 
-    private static Collection<Field> getFields(Class type) {
-        Collection<Field> result = FIELDS.get(type);
-        if (result == null) {
-            result = new HashSet<Field>();
-            while (type != Structure.class) {
-                for (Field field : type.getDeclaredFields()) {
-                    field.setAccessible(true);
-                    result.add(field);
+    private static Map<String, Property> getProperties(Class type) {
+        try {
+            Map<String, Property> result = PROPERTIES.get(type);
+            if (result == null) {
+                result = new HashMap<String, Property>();
+                for (PropertyDescriptor descriptor : Introspector.getBeanInfo(type, Structure.class).getPropertyDescriptors()) {
+                    Property property = new Property();
+                    property.accessor = descriptor.getReadMethod();
+                    property.mutator = descriptor.getWriteMethod();
+                    property.name = descriptor.getName();
+                    property.hidden = property.accessor.getAnnotation(Hidden.class) != null;
+                    property.key = property.accessor.getAnnotation(Key.class) != null;
+                    property.secret = property.accessor.getAnnotation(Secret.class) != null;
+                    property.accessor.setAccessible(true);
+                    property.mutator.setAccessible(true);
+                    result.put(property.name, property);
                 }
-                type = type.getSuperclass();
+                PROPERTIES.put(type, result);
             }
-            FIELDS.put(type, result);
+            return result;
+        } catch (IntrospectionException e) {
+            throw new RuntimeException(e);
         }
-        return result;
     }
 
     private static <T> Collection<T> copy(Collection<T> collection) {
@@ -179,12 +200,12 @@ public abstract class Structure implements Copyable, Printable, Serializable {
 
     }
 
-    public Map<String, Object> getStructureFields() {
+    public Map<String, Object> getStructureProperties() {
         Map<String, Object> result = new LinkedHashMap<String, Object>(); 
         Class<?> type = getClass();
-        for (Field field : getFields(type)) {
+        for (Property property : getProperties(type).values()) {
             try {
-                result.put(field.getName(), field.get(this));
+                result.put(property.name, property.accessor.invoke(this));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -198,8 +219,8 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         try {
             Class<?> type = getClass();
             Object result = type.newInstance();
-            for (Field field : getFields(type)) {
-                field.set(result, copy(field.get(this)));
+            for (Property property : getProperties(type).values()) {
+                property.mutator.invoke(result, property.accessor.invoke(this));
             }
             return (T) result;
         } catch (Exception e) {
@@ -216,10 +237,10 @@ public abstract class Structure implements Copyable, Printable, Serializable {
             return false;
         }
         try {
-            for (Field field : getFields(getClass())) {
-                if (field.isAnnotationPresent(Key.class)) {
-                    Object value = field.get(this);
-                    if (value == null || !value.equals(field.get(object))) {
+            for (Property property : getProperties(getClass()).values()) {
+                if (property.key) {
+                    Object value = property.accessor.invoke(this);
+                    if (value == null || !value.equals(property.accessor.invoke(object))) {
                         return false;
                     }
                 }
@@ -234,9 +255,9 @@ public abstract class Structure implements Copyable, Printable, Serializable {
     public int hashCode() {
         try {
             int hash = 5;
-            for (Field field : getFields(this.getClass())) {
-                if (field.isAnnotationPresent(Key.class)) {
-                    Object value = field.get(this);
+            for (Property property : getProperties(getClass()).values()) {
+                if (property.key) {
+                    Object value = property.accessor.invoke(this);
                     hash = 31 * hash + (value != null ? value.hashCode() : 0);
                 }
             }
@@ -248,22 +269,21 @@ public abstract class Structure implements Copyable, Printable, Serializable {
 
     @Override
     public StringBuilder print() {
-        StringBuilder result = new StringBuilder();
         try {
             Map<String, Object> fields = new HashMap<String, Object>();
-            for (Field field : getFields(getClass())) {
-                if (field.isAnnotationPresent(Hidden.class)) {
+            for (Property property : getProperties(getClass()).values()) {
+                if (property.hidden) {
                     continue;
                 }
                 Object value;
-                if (field.isAnnotationPresent(Secret.class)) {
+                if (property.secret) {
                     value = "*";
                 } else {
-                    value = field.get(this);
+                    value = property.accessor.invoke(this);
                 }
-                fields.put(field.getName(), print(value));
+                fields.put(property.name, print(value, true));
             }
-            return print(result);
+            return print(fields);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

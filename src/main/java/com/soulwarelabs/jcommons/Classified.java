@@ -3,7 +3,7 @@ package com.soulwarelabs.jcommons;
 public abstract class Classified<T> extends Nominated
         implements Classifiable<T> {
 
-    private @Key T code;
+    private T code;
 
     public Classified() {
         
@@ -14,6 +14,7 @@ public abstract class Classified<T> extends Nominated
         this.code = code;
     }
 
+    @Key
     @Override
     public T getCode() {
         return code;

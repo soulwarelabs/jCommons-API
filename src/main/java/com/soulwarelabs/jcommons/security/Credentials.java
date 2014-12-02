@@ -26,7 +26,6 @@
 package com.soulwarelabs.jcommons.security;
 
 import com.soulwarelabs.jcommons.Structure;
-import com.soulwarelabs.jcommons.Secret;
 
 /**
  * Authentication pair.
@@ -58,7 +57,7 @@ public class Credentials extends Structure {
     }
 
     private String login;
-    private @Secret String password;
+    private String password;
 
     /**
      * Creates a new authentication pair.

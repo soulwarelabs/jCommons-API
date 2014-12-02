@@ -3,7 +3,7 @@ package com.soulwarelabs.jcommons;
 public abstract class Identified<T> extends Structure
         implements Identifiable<T> {
 
-    private @Key T id;
+    private T id;
 
     public Identified() {
 
@@ -13,6 +13,7 @@ public abstract class Identified<T> extends Structure
         this.id = id;
     }
 
+    @Key
     public T getId() {
         return id;
     }

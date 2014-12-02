@@ -4,7 +4,7 @@
  *
  * File:     Secret.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.02, 27 November 2014
+ * Revision: 1.03, 03 December 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -33,17 +33,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Secret data structure member.
+ * Secret data structure accessor.
  *
  * @since v2.0.0
  *
  * @author Ilya Gubarev
- * @version 27 November 2014
+ * @version 03 December 2014
  */
 @Inherited
 @Documented
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Secret {
 
 }
