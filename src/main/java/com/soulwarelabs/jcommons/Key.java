@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Key.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/namings
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.00, 27 November 2014
  * Created:  27 November 2014
  * Authors:  Ilya Gubarev

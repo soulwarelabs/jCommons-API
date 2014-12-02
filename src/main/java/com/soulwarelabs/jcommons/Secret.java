@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     Secret.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/namings
+ * Folder:   src/main/java/com/soulwarelabs/jcommons
  * Revision: 1.02, 27 November 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
