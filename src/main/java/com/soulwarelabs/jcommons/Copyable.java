@@ -40,7 +40,7 @@ public interface Copyable {
      *
      * @param <T> object type.
      * @return copy of the object.
-     * @throws RuntimeException if error occurs while copying object.
+     * @throws RuntimeException if error occurs while copying the object.
      *
      * @since v1.1.0
      */

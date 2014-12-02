@@ -4,7 +4,7 @@
  *
  * File:     Structure.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.06, 03 December 2014
+ * Revision: 1.07, 03 December 2014
  * Created:  15 July 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,6 +25,7 @@
  */
 package com.soulwarelabs.jcommons;
 
+import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -64,8 +65,19 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         PROPERTIES = new HashMap<Class, Map<String, Property>>();
     }
 
+    /**
+     * Creates a new copy of specified object.
+     *
+     * @param <T> object type.
+     * @param object an object to be copied (optional).
+     * @return a copy of the object.
+     * @throws RuntimeException if error occurs while copying the object.
+     *
+     * @since v2.0.0
+     */
     @SuppressWarnings({"unchecked"})
     public static <T> T copy(T object) {
+        // NOTE: possible exception is declared
         if (object == null) {
             return null;
         } else if (object instanceof Collection<?>) {
@@ -90,7 +102,22 @@ public abstract class Structure implements Copyable, Printable, Serializable {
      * @since v1.1.0
      */
     public static StringBuilder print(Object object) {
-        return print(object, false);
+        if (object == null) {
+            return new StringBuilder().append("null");
+        }
+        if (object instanceof Collection<?>) {
+            return printCollection((Collection<?>) object);
+        }
+        if (object instanceof Map<?, ?>) {
+            return printMap((Map<?, ?>) object);
+        }
+        if (object instanceof Printable) {
+            return ((Printable) object).print();
+        }
+        if (object instanceof CharSequence) {
+            return new StringBuilder((CharSequence) object);
+        }
+        return new StringBuilder().append(object);
     }
 
     private static Map<String, Property> getProperties(Class type) {
@@ -98,17 +125,18 @@ public abstract class Structure implements Copyable, Printable, Serializable {
             Map<String, Property> result = PROPERTIES.get(type);
             if (result == null) {
                 result = new HashMap<String, Property>();
-                for (PropertyDescriptor descriptor : Introspector.getBeanInfo(type, Structure.class).getPropertyDescriptors()) {
-                    Property property = new Property();
-                    property.accessor = descriptor.getReadMethod();
-                    property.mutator = descriptor.getWriteMethod();
-                    property.name = descriptor.getName();
-                    property.hidden = property.accessor.getAnnotation(Hidden.class) != null;
-                    property.key = property.accessor.getAnnotation(Key.class) != null;
-                    property.secret = property.accessor.getAnnotation(Secret.class) != null;
-                    property.accessor.setAccessible(true);
-                    property.mutator.setAccessible(true);
-                    result.put(property.name, property);
+                BeanInfo info = Introspector.getBeanInfo(type, Structure.class);
+                for (PropertyDescriptor d : info.getPropertyDescriptors()) {
+                    Property p = new Property();
+                    p.accessor = d.getReadMethod();
+                    p.mutator = d.getWriteMethod();
+                    p.name = d.getName();
+                    p.hidden = p.accessor.getAnnotation(Hidden.class) != null;
+                    p.key = p.accessor.getAnnotation(Key.class) != null;
+                    p.secret = p.accessor.getAnnotation(Secret.class) != null;
+                    p.accessor.setAccessible(true);
+                    p.mutator.setAccessible(true);
+                    result.put(p.name, p);
                 }
                 PROPERTIES.put(type, result);
             }
@@ -139,25 +167,6 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         return array;
     }
 
-    private static StringBuilder print(Object object, boolean unbrace) {
-        if (object == null) {
-            return new StringBuilder().append("null");
-        }
-        if (object instanceof Collection<?>) {
-            return printCollection((Collection<?>) object);
-        }
-        if (object instanceof Map<?, ?>) {
-            return printMap((Map<?, ?>) object);
-        }
-        if (object instanceof Printable) {
-            return printText(((Printable) object).print(), unbrace);
-        }
-        if (object instanceof CharSequence) {
-            return printText((CharSequence) object, unbrace);
-        }
-        return printText(object.toString(), unbrace);
-    }
-
     private static StringBuilder printCollection(Collection<?> collection) {
         StringBuilder result = new StringBuilder("[");
         int index = 0;
@@ -174,21 +183,12 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         StringBuilder result = new StringBuilder("{");
         int index = 0;
         for (Object obj : map.keySet()) {
-            result.append("\"").append(print(obj, true)).append("\"");
-            result.append(": ").append(print(map.get(obj)));
+            result.append(print(obj)).append(": ").append(map.get(obj));
             if (++index < map.size()) {
                 result.append(", ");
             } 
         }
         return result.append("}");
-    }
-
-    private static StringBuilder printText(CharSequence text, boolean unbrace) {
-        if (unbrace) {
-            return new StringBuilder(text);
-        } else {
-            return new StringBuilder("\"").append(text).append("\"");
-        }
     }
 
     /**
@@ -200,6 +200,13 @@ public abstract class Structure implements Copyable, Printable, Serializable {
 
     }
 
+    /**
+     * Gets a map presentation of the structure.
+     *
+     * @return mapped structure properties.
+     *
+     * @since v2.0.0
+     */
     public Map<String, Object> getStructureProperties() {
         Map<String, Object> result = new LinkedHashMap<String, Object>(); 
         Class<?> type = getClass();
@@ -216,6 +223,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
     @Override
     @SuppressWarnings({"unchecked"})
     public <T> T copy() {
+        // NOTE: possible exception is declared in Copyable
         try {
             Class<?> type = getClass();
             Object result = type.newInstance();
@@ -240,7 +248,8 @@ public abstract class Structure implements Copyable, Printable, Serializable {
             for (Property property : getProperties(getClass()).values()) {
                 if (property.key) {
                     Object value = property.accessor.invoke(this);
-                    if (value == null || !value.equals(property.accessor.invoke(object))) {
+                    if (value == null ||
+                            !value.equals(property.accessor.invoke(object))) {
                         return false;
                     }
                 }
@@ -281,7 +290,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                 } else {
                     value = property.accessor.invoke(this);
                 }
-                fields.put(property.name, print(value, true));
+                fields.put(property.name, print(value));
             }
             return print(fields);
         } catch (Exception e) {
