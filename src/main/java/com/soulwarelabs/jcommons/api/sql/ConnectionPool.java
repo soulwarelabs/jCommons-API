@@ -3,7 +3,7 @@
  * Outline:  jCommons framework API components
  *
  * File:     ConnectionPool.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/sql
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/api/sql
  * Revision: 2.02, 28 November 2014
  * Created:  12 February 2014
  * Authors:  Ilya Gubarev
