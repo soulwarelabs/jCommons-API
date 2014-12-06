@@ -3,8 +3,8 @@
  * Outline:  jCommons framework API components
  *
  * File:     Failure.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/errors
- * Revision: 1.06, 28 November 2014
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/api/errors
+ * Revision: 1.07, 03 December 2014
  * Created:  16 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,42 +25,19 @@
  */
 package com.soulwarelabs.jcommons.api.errors;
 
-import com.soulwarelabs.jcommons.api.Structure;
-import com.soulwarelabs.jcommons.api.Printable;
+import com.soulwarelabs.jcommons.api.Classified;
 
 /**
  * Failure descriptor.
- * <p>
- * Designed to be logically comparable by the code.
  *
- * @see Pojo
- * @see Printable
+ * @see Classified
  *
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 30 August 2014
+ * @version 03 December 2014
  */
-public class Failure extends Structure implements Printable {
-
-    /**
-     * Creates a new copy of failure descriptor.
-     *
-     * @param failure original failure descriptor (optional).
-     * @return copied failure descriptor (optional).
-     *
-     * @since v1.1.0
-     */
-    public static Failure copy(Failure failure) {
-        if (failure == null) {
-            return null;
-        }
-        Failure result = new Failure();
-        result.code = failure.code;
-        result.details = failure.details;
-        result.title = failure.title;
-        return result;
-    }
+public class Failure extends Classified<String> {
 
     /**
      * Creates a new failure descriptor based on its string presentation.
@@ -76,20 +53,16 @@ public class Failure extends Structure implements Printable {
         int dash = failure.indexOf('-');
         int leftBracet = failure.indexOf('(');
         int rightBracet = failure.indexOf(')');
-        result.title = failure.substring(0, leftBracet).trim();
-        result.code = failure.substring(leftBracet + 1, rightBracet).trim();
+        result.setName(failure.substring(0, leftBracet).trim());
+        result.setCode(failure.substring(leftBracet + 1, rightBracet).trim());
         if (dash > 0) {
-            result.details = failure.substring(dash + 1).trim();
+            result.setDescription(failure.substring(dash + 1).trim());
         }
         return result;
     }
 
-    private String code;
-    private String details;
-    private String title;
-
     /**
-     * Creates a new failure descriptor.
+     * Creates a new instance of the failure descriptor.
      *
      * @since v1.1.0
      */ 
@@ -98,108 +71,24 @@ public class Failure extends Structure implements Printable {
     }
 
     /**
-     * Gets a code of the failure.
+     * Creates a new instance of the failure descriptor.
      *
-     * @return failure code.
+     * @param code failure's code.
+     * @param name failure's name.
+     * @param description failure's description.
      *
-     * @since v1.1.0
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * Sets a code of the failure.
-     *
-     * @param code failure code.
-     *
-     * @since v1.1.0
-     */
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    /**
-     * Gets details of the failure.
-     *
-     * @return failure details (optional).
-     *
-     * @since v1.1.0
-     */
-    public String getDetails() {
-        return details;
-    }
-
-    /**
-     * Sets details of the failure.
-     *
-     * @param details failure details (optional).
-     *
-     * @since v1.1.0
-     */
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    /**
-     * Gets a title of the failure.
-     *
-     * @return failure title.
-     *
-     * @since v1.1.0
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets a title of the failure.
-     *
-     * @param title failure title.
-     *
-     * @since v1.1.0
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    @SuppressWarnings({"unchecked"})
-    public <T> T copy() {
-         // NOTE: possible exception is documented for Copyable.copy()
-        return (T) copy(this);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == null) {
-            return false;
-        }
-        if (getClass() != object.getClass()) {
-            return false;
-        }
-        Failure other = (Failure) object;
-        if (code == null || !code.equals(other.code)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 7;
-        result = result * 13 + (code != null ? code.hashCode() : 0);
-        result = result * 13 + (details != null ? details.hashCode() : 0);
-        result = result * 13 + (title != null ? title.hashCode() : 0);
-        return result;
+     * @since v2.0.0
+     */ 
+    public Failure(String code, String name, String description) {
+        super(code, name, description);
     }
 
     @Override
     public StringBuilder print() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("%s (%s)", title, code));
-        if (details != null) {
-            result.append(String.format(" - %s", details));
+        result.append(String.format("%s (%s)", getName(), getCode()));
+        if (getDescription() != null) {
+            result.append(String.format(" - %s", getDescription()));
         }
         return result;
     }
