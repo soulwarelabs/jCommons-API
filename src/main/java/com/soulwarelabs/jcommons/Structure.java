@@ -4,7 +4,7 @@
  *
  * File:     Structure.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.07, 03 December 2014
+ * Revision: 1.08, 06 December 2014
  * Created:  15 July 2014
  * Authors:  Ilya Gubarev
  *
@@ -45,7 +45,7 @@ import java.util.Map;
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 03 December 2014
+ * @version 06 December 2014
  */
 public abstract class Structure implements Copyable, Printable, Serializable {
 
@@ -56,7 +56,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         private String name;
         private boolean hidden;
         private boolean key;
-        private boolean secret;
+        private String secret;
     }
 
     private final static Map<Class, Map<String, Property>> PROPERTIES;
@@ -77,7 +77,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
      */
     @SuppressWarnings({"unchecked"})
     public static <T> T copy(T object) {
-        // NOTE: possible exception is declared
+        // NOTE: possible runtime exception is declared
         if (object == null) {
             return null;
         } else if (object instanceof Collection<?>) {
@@ -133,7 +133,10 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                     p.name = d.getName();
                     p.hidden = p.accessor.getAnnotation(Hidden.class) != null;
                     p.key = p.accessor.getAnnotation(Key.class) != null;
-                    p.secret = p.accessor.getAnnotation(Secret.class) != null;
+                    Secret secret = p.accessor.getAnnotation(Secret.class);
+                    if (secret != null) {
+                        p.secret = secret.value();
+                    }
                     p.accessor.setAccessible(true);
                     p.mutator.setAccessible(true);
                     result.put(p.name, p);
@@ -213,7 +216,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
         for (Property property : getProperties(type).values()) {
             try {
                 result.put(property.name, property.accessor.invoke(this));
-            } catch (Exception e) {
+            } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -223,7 +226,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
     @Override
     @SuppressWarnings({"unchecked"})
     public <T> T copy() {
-        // NOTE: possible exception is declared in Copyable
+        // NOTE: possible runtime exception is declared in Copyable
         try {
             Class<?> type = getClass();
             Object result = type.newInstance();
@@ -231,7 +234,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                 property.mutator.invoke(result, property.accessor.invoke(this));
             }
             return (T) result;
-        } catch (Exception e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -254,7 +257,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
         return true;
@@ -271,7 +274,7 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                 }
             }
             return hash;
-        } catch (Exception e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -284,16 +287,12 @@ public abstract class Structure implements Copyable, Printable, Serializable {
                 if (property.hidden) {
                     continue;
                 }
-                Object value;
-                if (property.secret) {
-                    value = "*";
-                } else {
-                    value = property.accessor.invoke(this);
-                }
+                Object value = property.secret != null ? property.secret :
+                        property.accessor.invoke(this);
                 fields.put(property.name, print(value));
             }
             return print(fields);
-        } catch (Exception e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException(e);
         }
     }

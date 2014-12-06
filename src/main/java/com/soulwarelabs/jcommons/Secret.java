@@ -4,7 +4,7 @@
  *
  * File:     Secret.java
  * Folder:   src/main/java/com/soulwarelabs/jcommons
- * Revision: 1.03, 03 December 2014
+ * Revision: 1.04, 08 December 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
  * @since v2.0.0
  *
  * @author Ilya Gubarev
- * @version 03 December 2014
+ * @version 08 December 2014
  */
 @Inherited
 @Documented
@@ -46,4 +46,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Secret {
 
+    /**
+     * Secret value substitution.
+     *
+     * @return value substitution.
+     *
+     * @since v2.0.0
+     */
+    String value() default "*";
 }
