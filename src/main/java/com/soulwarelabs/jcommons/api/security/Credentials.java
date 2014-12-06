@@ -3,8 +3,8 @@
  * Outline:  jCommons framework API components
  *
  * File:     Credentials.java
- * Folder:   src/main/java/com/soulwarelabs/jcommons/security
- * Revision: 1.02, 28 November 2014
+ * Folder:   src/main/java/com/soulwarelabs/jcommons/api/security
+ * Revision: 1.03, 06 December 2014
  * Created:  17 August 2014
  * Authors:  Ilya Gubarev
  *
@@ -25,36 +25,21 @@
  */
 package com.soulwarelabs.jcommons.api.security;
 
+import com.soulwarelabs.jcommons.api.Key;
+import com.soulwarelabs.jcommons.api.Secret;
 import com.soulwarelabs.jcommons.api.Structure;
 
 /**
  * Authentication pair.
- * <p>
- * Designed to be logically comparable by both the login and the password.
  *
- * @see Pojo
+ * @see Structure
  *
  * @since v1.1.0
  *
  * @author Ilya Gubarev
- * @version 24 August 2014
+ * @version 06 December 2014
  */
 public class Credentials extends Structure {
-
-    /**
-     * Creates a new copy of authentication pair.
-     *
-     * @param credentials original authentication pair (optional).
-     * @return copied authentication pair (optional).
-     *
-     * @since v1.1.0
-     */
-    public static Credentials copy(Credentials credentials) {
-        if (credentials == null) {
-            return null;
-        }
-        return new Credentials(credentials.login, credentials.password);
-    }
 
     private String login;
     private String password;
@@ -65,7 +50,7 @@ public class Credentials extends Structure {
      * @since v1.1.0
      */
     public Credentials() {
-        this(null, null);
+
     }
 
     /**
@@ -88,6 +73,7 @@ public class Credentials extends Structure {
      *
      * @since v1.1.0
      */
+    @Key
     public String getLogin() {
         return login;
     }
@@ -110,6 +96,8 @@ public class Credentials extends Structure {
      *
      * @since v1.1.0
      */
+    @Key
+    @Secret
     public String getPassword() {
         return password;
     }
@@ -123,39 +111,5 @@ public class Credentials extends Structure {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    @SuppressWarnings({"unchecked"})
-    public <T> T copy() {
-         // NOTE: possible exception is documented for Copyable.copy()
-        return (T) copy(this);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == null) {
-            return false;
-        }
-        if (getClass() != object.getClass()) {
-            return false;
-        }
-        Credentials other = (Credentials) object;
-        if (login == null ? other.login != null : !login.equals(other.login)) {
-            return false;
-        }
-        if (password == null ? other.password != null :
-                !password.equals(other.password)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 7;
-        result = 29 * result + (login != null ? login.hashCode() : 0);
-        result = 29 * result + (password != null ? password.hashCode() : 0);
-        return result;
     }
 }
